@@ -1,11 +1,14 @@
 This is the repository of our PIC project on news recommendation federated learning.
 
-NMRS model is implemented federatedly via Pysyft.
+NRMS model is implemented federatedly via Pysyft.
 
 ## Requirements
 python==3.6
+
 Pysyft==0.2.x
+
 torch==1.4.0
+
 tensorboard==2.5.0
 
 For installation of Pysyft_0.2.x, please check the Pysyft website: [Pysyft_0.2.x](https://github.com/OpenMined/PySyft/tree/syft_0.2.x)
@@ -30,9 +33,9 @@ unzip glove.840B.300d.zip -d glove
 rm glove.840B.300d.zip
 ```
 
-To run the NMRS model using Adam Optimizer, run `Syft_train_individuel.py`.
+To run the NRMS model using Adam Optimizer, run `Python3 Syft_train_individuel.py`.
 
-To run the NMRS model using SGD Optimizer, run `Syft_train.py`.
+To run the NRMS model using SGD Optimizer, run `Python3 Syft_train.py`.
 
 ## More information
 
