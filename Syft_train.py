@@ -47,6 +47,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model_name = "NRMS"
 Model = getattr(importlib.import_module(f"model.{model_name}"), model_name)
 config = getattr(importlib.import_module('config'), f"{model_name}Config")
+config.learning_rate=0.01
 
 
 # In[4]:
@@ -184,7 +185,7 @@ def train():
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(),
                                  lr=config.learning_rate)
-        
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size = 3, gamma=0.95, last_epoch=-1)
     start_time = time.time()
     loss_full = []
     exhaustion_count = 0
@@ -232,22 +233,7 @@ def train():
             minibatch, target = minibatch.to(device), target.to(device)
             #minibatch = minibatch.to(device)
             #################################################
-            '''
-            print(len( minibatch["candidate_news"]))
-            for x in minibatch["candidate_news"]:
-                print(x)
-                print(x['title'].size())
-            print("*********************************************************")
-            print(len( minibatch["clicked_news"]))    
-            for x in minibatch["clicked_news"]:
-                print(x)
-                print(x['title'].size())
-            exit()'''
-            #y_pred = model(minibatch["candidate_news"],
-            #               minibatch["clicked_news"])
-            
-            #y_pred = model(minibatch[:,0:3,:],
-             #              minibatch[:,3:,:])
+
             y_pred = model(minibatch)
         
         #y = torch.zeros(config.batch_size).long().to(device)
@@ -272,13 +258,14 @@ def train():
                     'Train/TopicBaseRatio',
                     topic_classification_loss.item() / loss.item(), step)
             loss += config.topic_classification_loss_weight * topic_classification_loss
-            
-        
+
+
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+        scheduler.step()
         model.get()
-        
+
         loss = loss.get().detach().cpu().item()
         loss_full.append(loss)
 
@@ -346,4 +333,5 @@ def time_since(since):
 print('Using device:', device)
 print(f'Training model {model_name}')
 print(torch.cuda.get_device_name(device))
+print("lr is :", config.learning_rate)
 train()
