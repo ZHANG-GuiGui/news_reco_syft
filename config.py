@@ -11,12 +11,12 @@ class BaseConfig():
     """
     General configurations appiled to all models
     """
-    num_epochs = 40
+    num_epochs = 15
     num_batches_show_loss = 100  # Number of batchs to show loss
     # Number of batchs to check metrics on validation dataset
     num_batches_validate = 1000
     batch_size = 128
-    learning_rate = 0.0001
+    learning_rate = 0.0005
     num_workers = 4  # Number of workers for data loading
     num_clicked_news_a_user = 50  # Number of sampled click history for each user
     num_words_title = 20
