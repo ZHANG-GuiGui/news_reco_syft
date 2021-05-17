@@ -33,9 +33,19 @@ unzip glove.840B.300d.zip -d glove
 rm glove.840B.300d.zip
 ```
 
-To run the NRMS model using Adam Optimizer, run `Python3 Syft_train_individuel.py`.
+Then, preprocess the data.
 
-To run the NRMS model using SGD Optimizer, run `Python3 Syft_train.py`.
+```
+# Preprocess data into appropriate format
+cd ..
+python3 data_preprocess.py
+```
+
+**Remember you should modify `num_*` in `config.py` by the output of `data_preprocess.py`**
+
+To run the NRMS model using Adam Optimizer, run `python3 Syft_train_individuel.py`.
+
+To run the NRMS model using SGD Optimizer, run `python3 Syft_train.py`.
 
 ## More information
 
