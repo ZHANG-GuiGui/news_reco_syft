@@ -3,7 +3,7 @@ This is the repository of our PIC project on news recommendation federated learn
 NRMS model is implemented federatedly via Pysyft.
 
 ## Requirements
-python==3.6
+python>=3.6
 
 Pysyft==0.2.x
 
@@ -38,14 +38,14 @@ Then, preprocess the data.
 ```
 # Preprocess data into appropriate format
 cd ..
-python3 data_preprocess.py
+python3 src/data_preprocess.py
 ```
 
-**Remember you should modify `num_*` in `config.py` by the output of `data_preprocess.py`**
+**Remember you should modify `num_*` in `src/config.py` by the output of `src/data_preprocess.py`**
 
-To run the NRMS model using Adam Optimizer, run `python3 Syft_train_individuel.py`.
+To run the NRMS model using Adam Optimizer, run `python3 src/Syft_train_individuel.py`.
 
-To run the NRMS model using SGD Optimizer, run `python3 Syft_train.py`.
+To run the NRMS model using SGD Optimizer, run `python3 src/Syft_train.py`.
 
 ## More information
 
