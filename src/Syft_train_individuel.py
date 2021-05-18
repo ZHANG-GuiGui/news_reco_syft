@@ -114,9 +114,9 @@ def train(fed_num):
     model = Model(config, pretrained_word_embedding)
     print(model)
 
-    dataset = BaseDataset('../data/train/behaviors_parsed.tsv',
-                          '../data/train/news_parsed.tsv', 
-                          '../data/train/roberta')
+    dataset = BaseDataset('./data/train/behaviors_parsed.tsv',
+                          './data/train/news_parsed.tsv', 
+                          './data/train/roberta')
 
     print(f"Load training dataset with size {len(dataset)}.")
     ###############################################
@@ -224,7 +224,7 @@ def train(fed_num):
                     models.append(model.to(device).copy().send(str(index)))
                 model.eval()
                 val_auc, val_mrr, val_ndcg5, val_ndcg10 = evaluate(
-                    model, '../data/val',
+                    model, './data/val',
                     200000)
                 model.train()
                 writer.add_scalar('Validation/AUC', val_auc, step)
